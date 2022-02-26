@@ -4,7 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
@@ -13,5 +14,17 @@
   },
   "devDependencies": {
     "jest": "^27.5.1"
-  }
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MrSumada/expressive-note-taker.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/MrSumada/expressive-note-taker/issues"
+  },
+  "homepage": "https://github.com/MrSumada/expressive-note-taker#readme"
 }
