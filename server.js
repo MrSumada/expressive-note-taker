@@ -30,6 +30,18 @@ function createNewNote(body, notesArray) {
   return note;
 }
 
+// function deleteNote(body, notesArray) {
+
+//   const { id } = body.params;
+//   const notesIndex = notes.findIndex(p => p.id == id);
+
+//   notes.splice(notesIndex, 1);
+
+//   return res.json();
+
+
+// }
+
 function validateNote(note) {
   if (!note.title || typeof note.title !== "string") {
     return false;
@@ -41,11 +53,21 @@ function validateNote(note) {
   return true;
 }
 
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, "./public/index.html"));
+})
 
+app.get('/notes', (req, res) => {
+  res.sendFile(path.join(__dirname, "./public/notes.html"));
+})
 
 app.get('/api/notes', (req, res) => {
   res.json(notes);
 });
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, "./public/index.html"));
+})
 
 app.post('/api/notes', (req, res) => {
 
@@ -58,6 +80,33 @@ app.post('/api/notes', (req, res) => {
     res.json(note);
     }
 })
+
+app.delete('/api/notes/:id', (req, res) => {
+  const deletedNoteId = req.params.id;
+  fs.readFile(__dirname + '/db/db.json', (err, data) => {
+    if (err) {
+      res.sendStatus(500);
+      return;
+    }
+
+    const newNotes = JSON.parse(data);
+
+    for (var i = 0; i < newNotes.length; i++) {
+      if (newNotes[i].id === deletedNoteId) {
+        newNotes.splice(i, 1);
+        return;
+      }
+    }
+
+    fs.writeFile(__dirname + '/db/db.json', JSON.stringify(newNotes), (err) => {
+      if (err) {
+        res.sendStatus(500);
+        return;
+      }
+      res.json(newNotes);
+    });
+  });
+});
 
 app.listen(PORT, () => {
     console.log(`API server now on port ${PORT}!`);
