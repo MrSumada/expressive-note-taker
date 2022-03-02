@@ -1,3 +1,9 @@
 {
-    "notes": []
+    "notes": [
+        {
+            "title": "Example Note",
+            "text": "Example text: enjoy the Note Taker!",
+            "id": "0"
+        }
+    ]
 }
