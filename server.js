@@ -58,9 +58,13 @@ app.post('/api/notes', (req, res) => {
 
     // get unique id based on last note added 
     // (rather than the array length, which can vary depending on deletions)
+    if (notes.length >= 1) {
     const lastEl = notes[notes.length - 1];
     const lastId = parseInt(lastEl.id) + 1;
     req.body.id = lastId.toString();
+    } else {
+      req.body.id = 0;
+    }
 
     if (!validateNote(req.body)) {
       res.status(400).send("Be sure to type out your note and give it a title!");
