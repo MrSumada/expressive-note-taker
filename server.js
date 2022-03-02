@@ -82,28 +82,40 @@ app.post('/api/notes', (req, res) => {
 })
 
 app.delete('/api/notes/:id', (req, res) => {
-  const deletedNoteId = req.params.id;
+
   fs.readFile(__dirname + '/db/db.json', (err, data) => {
+    
     if (err) {
+      console.error(err);
       res.sendStatus(500);
       return;
     }
+    const { id } = req.params;
+    
+    let newNotesArray = JSON.parse(data);
+    
+    console.log(newNotesArray.notes)
+    newNotesArray.notes.splice(id, 1);
+    console.log(newNotesArray.notes);
 
-    const newNotes = JSON.parse(data);
+    // for (var i = 0; i < newNotesArray.length; i++) {
 
-    for (var i = 0; i < newNotes.length; i++) {
-      if (newNotes[i].id === deletedNoteId) {
-        newNotes.splice(i, 1);
-        return;
-      }
-    }
+    //   if (newNotesArray[i].id === id) {
 
-    fs.writeFile(__dirname + '/db/db.json', JSON.stringify(newNotes), (err) => {
+    //     newNotesArray.splice(i, 1);
+        
+    //     return;
+    //   }
+      
+    // }
+
+    fs.writeFile('./db/db.json', JSON.stringify({ notes: newNotesArray.notes }, null, 4), (err) => {
       if (err) {
         res.sendStatus(500);
         return;
       }
-      res.json(newNotes);
+      // console.log(newNotesArray.notes);
+      res.json(newNotesArray);
     });
   });
 });
