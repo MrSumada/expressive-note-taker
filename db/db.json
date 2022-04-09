@@ -1,9 +1,19 @@
 {
-    "notes": [
-        {
-            "title": "Example Note",
-            "text": "Example text: enjoy the Note Taker!",
-            "id": "0"
-        }
-    ]
+  "notes": [
+    {
+      "title": "Example Note",
+      "text": "Example text",
+      "id": 0
+    },
+    {
+      "title": "Now it works",
+      "text": "Great!",
+      "id": 1
+    },
+    {
+      "title": "Even the ID",
+      "text": "Check out that db.json!",
+      "id": 2
+    }
+  ]
 }
