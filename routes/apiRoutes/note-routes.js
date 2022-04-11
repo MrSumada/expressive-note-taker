@@ -44,6 +44,8 @@ router.post('/', (req, res) => {
     if (notes.length >= 1) {
         const lastEl = notes[notes.length - 1];
         const lastId = parseInt(lastEl.id) + 1;
+
+        // this adds a unique id when a post is created
         req.body.id = lastId;
     } else {
         req.body.id = 0;
