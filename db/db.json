@@ -2,18 +2,8 @@
   "notes": [
     {
       "title": "Example Note",
-      "text": "Example text",
-      "id": 0
-    },
-    {
-      "title": "Now it works",
-      "text": "Great!",
-      "id": 1
-    },
-    {
-      "title": "Even the ID",
-      "text": "Check out that db.json!",
-      "id": 2
+      "text": "Example Text",
+      "id": "e0485020-2e65-4715-9046-8d79dc3539b9"
     }
   ]
 }

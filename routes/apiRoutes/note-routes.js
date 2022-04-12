@@ -2,6 +2,7 @@ const router = require('express').Router();
 const fs = require('fs');
 const path = require('path');
 const { notes } = require("../../db/db.json");
+const { v4: uuidv4 } = require('uuid');
 
 
 // GET existing notes from the db
@@ -39,17 +40,8 @@ router.post('/', (req, res) => {
         return true;
     }
 
-    // get unique id based on last note added 
-    // (rather than the array length, which can vary depending on deletions)
-    if (notes.length >= 1) {
-        const lastEl = notes[notes.length - 1];
-        const lastId = parseInt(lastEl.id) + 1;
-
-        // this adds a unique id when a post is created
-        req.body.id = lastId;
-    } else {
-        req.body.id = 0;
-    }
+    // get unique id
+    req.body.id = uuidv4();
 
     // check for validation
     if (!validateNote(req.body)) {
